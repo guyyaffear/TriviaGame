@@ -1,22 +1,61 @@
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+var Q1 = {
+    Triva: {
+        qustion1: "Who play Neo in the Matrix",
+        answers:  ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
+        },
+    }
+function answers () {
+    $("#Strbutton").replaceWith("<h2>"+ Q1.Triva.qustion1+"</h2>" );
+    var counter = 0 ;
+    for(var i=0;i<Q1.Triva.answers.items.length;i++)
+    {
+        var answerbutton=$("<button>");
+        answerbutton.attr("data-letter",Q1.Triva.answers.items[i]);
+        answerbutton.text(Q1.Triva.answers.items[i]);
+        $(".new").append(answerbutton);
+        $(answerbutton).on('click',function(){
+            if(answerbutton === Q1.Triva.answers.items[0])
+            {
+              counter++;
+              console.log(counter);
+            }
+            else
+          console.log("worng answer");  
+              
+        })
+         
+        
 
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
+    
+        //  .then(function (){
+        //     $("#new").append("<button id=Q1>"+Q1.Triva.answers.items[i]+"</button>") 
+        //  } 
+    
+        // );
+    }
+    
+  }
+  
+$('#Strbutton').on('click', function () {
+   answers();
 }
+)
 
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
+// function renderButtons() {
+
+//     // $('#Strbutton').empty();
+
+//     for (var i = 0; i < Q1.Triva.qustion1.items.length; i++) {
+//       var movieButton = $('<button>').addClass("btn btn-primary btn-lg btn-block").attr({ answers: items[i] }).html(items[i]);
+//       $('#Strbutton').append(movieButton);
+//     }
+
+//     // Delete the content inside the buttons-view div prior to adding new movies
+//     // (this is necessary otherwise you will have repeat buttons)
+
+//     // Loop through the array of movies, then generate buttons for each movie in the array
+
+//   }
+  
+
