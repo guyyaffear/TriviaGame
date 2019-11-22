@@ -8,14 +8,14 @@ var Q1 = {
 function answers () {
     $("#Strbutton").replaceWith("<h2>"+ Q1.Triva.qustion1+"</h2>" );
     var counter = 0 ;
-    for(var i=0;i<Q1.Triva.answers.items.length;i++)
+    for(var i=0;i<Q1.Triva.answers.length;i++)
     {
         var answerbutton=$("<button>");
-        answerbutton.attr("data-letter",Q1.Triva.answers.items[i]);
-        answerbutton.text(Q1.Triva.answers.items[i]);
+        answerbutton.attr("data-letter",Q1.Triva.answers[i]);
+        answerbutton.text(Q1.Triva.answers[i]);
         $(".new").append(answerbutton);
         $(answerbutton).on('click',function(){
-            if(answerbutton === Q1.Triva.answers.items[0])
+            if(answerbutton === Q1.Triva.answerss[0])
             {
               counter++;
               console.log(counter);
