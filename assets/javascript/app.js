@@ -17,7 +17,8 @@ var counter=0;
 var currentQuestion = 0;
 
 function answers() {
-  $("#Strbutton").hmtl(("<h2>" + questions[currentQuestion].qustion + "</h2>"));
+  $("#container").empty();
+  $("#container").append(("<h2>" + questions[currentQuestion].qustion + "</h2>"));
   console.log(questions[currentQuestion].answers);
   for (var i = 0; i <questions[currentQuestion].answers.length; i++)
    {
@@ -25,7 +26,7 @@ function answers() {
     answerbutton.attr("data-letter", questions[currentQuestion].answers[i]);
     answerbutton.addClass("answerbutton");
     answerbutton.text(questions[currentQuestion].answers[i]);
-    $(".new").append(answerbutton);
+    $("#container").append(answerbutton);
     console.log(answerbutton.text());
     console.log(questions[currentQuestion].answers[0]);
   }
@@ -66,7 +67,22 @@ function answers() {
 
     answers();
   });
+  // var timeRemaining = 30;
+  // function playRound() {
+  //   // Populate #question-window with relevant data.
+  //   answers(currentQuestion);
 
+  //   // Run timers
+  //   timeRemaining = 30;
+  //   var timerDisplay = setInterval(function() {
+  //       timeRemaining--;
+  //       $("#timer").text(timeRemaining);
+  //       if (timeRemaining === 0) {
+  //           clearInterval(timerDisplay);
+  //           timeRemaining = 30;
+  //       }
+  //   }, 1000);
+  
 $('#Strbutton').on('click', function () {
   answers();
 }
