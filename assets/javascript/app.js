@@ -1,64 +1,73 @@
-
-var Q1 = {
-  Triva: {
-    qustion1: "Who play Neo in the Matrix",
+var questions = [
+  {
+    qustion: "Who play Neo in the Matrix",
     answers: ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
   },
-}
+  {
+    qustion: "Who play 31 in the Matrix",
+    answers: ["111", "abc", "cbs"],
+  },
+  {
+    qustion: "Who play 22 in the Matrix",
+    answers: ["222", "3333", "h1h2h3"],
+  }
+]
+
+var counter=0;
+var currentQuestion = 0;
+
 function answers() {
-  $("#Strbutton").replaceWith("<h2>" + Q1.Triva.qustion1 + "</h2>");
-  var counter = 0;
-  for (var i = 0; i < Q1.Triva.answers.length; i++) {
+  $("#Strbutton").hmtl(("<h2>" + questions[currentQuestion].qustion + "</h2>"));
+  console.log(questions[currentQuestion].answers);
+  for (var i = 0; i <questions[currentQuestion].answers.length; i++)
+   {
     var answerbutton = $("<button>");
-    answerbutton.attr("data-letter", Q1.Triva.answers[i]);
+    answerbutton.attr("data-letter", questions[currentQuestion].answers[i]);
     answerbutton.addClass("answerbutton");
-    answerbutton.text(Q1.Triva.answers[i]);
+    answerbutton.text(questions[currentQuestion].answers[i]);
     $(".new").append(answerbutton);
     console.log(answerbutton.text());
-    console.log(Q1.Triva.answers[0]);
+    console.log(questions[currentQuestion].answers[0]);
   }
+
+  
+}
+  // for (var i = 0; i < Q2.Triva.answers.length; i++) {
+  //   var answerbutton = $("<button>");
+  //   answerbutton.attr("data-letter", Q1.Triva.answers[i]);
+  //   answerbutton.addClass("answerbutton");
+  //   answerbutton.text(Q1.Triva.answers[i]);
+  //   $(".qustion2").append(answerbutton);
+  //   console.log(answerbutton.text());
+  //   console.log(Q1.Triva.answers[1]);
+  // }
+  // for (var i = 0; i < Q3.Triva.answers.length; i++) {
+  //   var answerbutton = $("<button>");
+  //   answerbutton.attr("data-letter", Q1.Triva.answers[i]);
+  //   answerbutton.addClass("answerbutton");
+  //   answerbutton.text(Q1.Triva.answers[i]);
+  //   $(".qustion3").append(answerbutton);
+  //   console.log(answerbutton.text());
+  //   console.log(Q3.Triva.answers[2]);
+  // }
   $(document).on('click', ".answerbutton", function () {
-   
-    if ($(this).text() === Q1.Triva.answers[0]) {
+
+    if ($(this).text() === questions[currentQuestion].answers[0]) {
       counter++;
+      
       console.log(counter);
     }
     else {
+      
       console.log("worng answer");
     }
-  })
 
+    currentQuestion++;
 
-
-
-  //  .then(function (){
-  //     $("#new").append("<button id=Q1>"+Q1.Triva.answers.items[i]+"</button>") 
-  //  } 
-
-  // );
-}
-
-
+    answers();
+  });
 
 $('#Strbutton').on('click', function () {
   answers();
 }
 )
-
-// function renderButtons() {
-
-//     // $('#Strbutton').empty();
-
-//     for (var i = 0; i < Q1.Triva.qustion1.items.length; i++) {
-//       var movieButton = $('<button>').addClass("btn btn-primary btn-lg btn-block").attr({ answers: items[i] }).html(items[i]);
-//       $('#Strbutton').append(movieButton);
-//     }
-
-//     // Delete the content inside the buttons-view div prior to adding new movies
-//     // (this is necessary otherwise you will have repeat buttons)
-
-//     // Loop through the array of movies, then generate buttons for each movie in the array
-
-//   }
-
-
