@@ -10,6 +10,18 @@ var questions = [
   {
     qustion: "Who play 22 in the Matrix",
     answers: ["222", "3333", "h1h2h3"],
+  },
+  {
+    qustion: "Who play Neo in the Matrix",
+    answers: ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
+  },
+  {
+    qustion: "Who play 31 in the Matrix",
+    answers: ["111", "abc", "cbs"],
+  },
+  {
+    qustion: "Who play 22 in the Matrix",
+    answers: ["222", "3333", "h1h2h3"],
   }
 ]
 
@@ -38,7 +50,7 @@ function answers() {
 }
 
 function handleClick(){
-  console.log('handleClick is called');
+  console.log('possible answers are', questions[currentQuestion].answers);
   if ($(this).text() === questions[currentQuestion].answers[0]) {
     console.log('win win win')
     result(true);
