@@ -13,77 +13,109 @@ var questions = [
   }
 ]
 
-var counter=0;
+var counter = 0;
 var currentQuestion = 0;
+var setTime = 5;
+
+
 
 function answers() {
+  console.log('answers is called')
   $("#container").empty();
   $("#container").append(("<h2>" + questions[currentQuestion].qustion + "</h2>"));
-  console.log(questions[currentQuestion].answers);
-  for (var i = 0; i <questions[currentQuestion].answers.length; i++)
-   {
+  // console.log(questions[currentQuestion].answers);
+  for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
     var answerbutton = $("<button>");
     answerbutton.attr("data-letter", questions[currentQuestion].answers[i]);
     answerbutton.addClass("answerbutton");
     answerbutton.text(questions[currentQuestion].answers[i]);
     $("#container").append(answerbutton);
-    console.log(answerbutton.text());
-    console.log(questions[currentQuestion].answers[0]);
+    // console.log(answerbutton.text());
+    // console.log(questions[currentQuestion].answers[0]);
   }
 
-  
+  $(document).on('click', ".answerbutton", handleClick);
 }
-  // for (var i = 0; i < Q2.Triva.answers.length; i++) {
-  //   var answerbutton = $("<button>");
-  //   answerbutton.attr("data-letter", Q1.Triva.answers[i]);
-  //   answerbutton.addClass("answerbutton");
-  //   answerbutton.text(Q1.Triva.answers[i]);
-  //   $(".qustion2").append(answerbutton);
-  //   console.log(answerbutton.text());
-  //   console.log(Q1.Triva.answers[1]);
-  // }
-  // for (var i = 0; i < Q3.Triva.answers.length; i++) {
-  //   var answerbutton = $("<button>");
-  //   answerbutton.attr("data-letter", Q1.Triva.answers[i]);
-  //   answerbutton.addClass("answerbutton");
-  //   answerbutton.text(Q1.Triva.answers[i]);
-  //   $(".qustion3").append(answerbutton);
-  //   console.log(answerbutton.text());
-  //   console.log(Q3.Triva.answers[2]);
-  // }
-  $(document).on('click', ".answerbutton", function () {
 
-    if ($(this).text() === questions[currentQuestion].answers[0]) {
-      counter++;
-      
-      console.log(counter);
+function handleClick(){
+  console.log('handleClick is called');
+  if ($(this).text() === questions[currentQuestion].answers[0]) {
+    console.log('win win win')
+    result(true);
+    counter++;
+
+    console.log(counter);
+  }
+  else {
+    console.log('loser')
+    result(false);
+    console.log("worng answer");
+  }
+
+  currentQuestion++;
+
+  answers();
+}
+
+function result(isCorrect) {
+  console.log('result is called');
+  $('#container').empty();
+  var image = $("<img>");
+  console.log('isCorrect',isCorrect);
+  if (isCorrect) {
+    image.attr('src','https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif')
+  }
+  else
+  {
+    image.attr('src','https://media.giphy.com/media/m8eIbBdkJK7Go/giphy.gif')
+  }
+  $("#container").append(image);
+}
+
+// $(document).on('click', ".answerbutton", function () {
+// console.log('clicked')
+//   if ($(this).text() === questions[currentQuestion].answers[0]) {
+//     console.log('win win win')
+//     result(true);
+//     counter++;
+
+//     console.log(counter);
+//   }
+//   else {
+//     console.log('loser')
+//     result(false);
+//     console.log("worng answer");
+//   }
+
+//   currentQuestion++;
+
+//   answers();
+// });
+function startTimer(setTime) {
+  var timer = setTime, minutes, seconds;
+  var intervalId;
+  intervalId = setInterval(function () {
+    timerRunning = true;
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    $(".timer").text(minutes + ":" + seconds);
+    if (--timer < 0) {
+      timeUp(intervalId);
+      // document.getElementById("details").setAttribute("disabled","disabled");
     }
-    else {
-      
-      console.log("worng answer");
-    }
+  }, 1000);
+}
+function timeUp(interval) {
+  clearInterval(interval);
+  timerRunning = false;
+  result(false);
+  $(".timer").text("Time up!!!"+"The answer is "+ questions[currentQuestion].answers[0]);
 
-    currentQuestion++;
-
-    answers();
-  });
-  // var timeRemaining = 30;
-  // function playRound() {
-  //   // Populate #question-window with relevant data.
-  //   answers(currentQuestion);
-
-  //   // Run timers
-  //   timeRemaining = 30;
-  //   var timerDisplay = setInterval(function() {
-  //       timeRemaining--;
-  //       $("#timer").text(timeRemaining);
-  //       if (timeRemaining === 0) {
-  //           clearInterval(timerDisplay);
-  //           timeRemaining = 30;
-  //       }
-  //   }, 1000);
-  
+}
 $('#Strbutton').on('click', function () {
   answers();
+  startTimer(setTime);
 }
 )
