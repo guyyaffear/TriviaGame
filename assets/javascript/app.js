@@ -15,7 +15,7 @@ var questions = [
 
 var counter = 0;
 var currentQuestion = 0;
-var setTime = 5;
+var setTime = 30;
 
 
 
@@ -53,12 +53,11 @@ function handleClick(){
   }
 
   currentQuestion++;
-
-  answers();
 }
 
 function result(isCorrect) {
   console.log('result is called');
+  
   $('#container').empty();
   var image = $("<img>");
   console.log('isCorrect',isCorrect);
@@ -70,6 +69,8 @@ function result(isCorrect) {
     image.attr('src','https://media.giphy.com/media/m8eIbBdkJK7Go/giphy.gif')
   }
   $("#container").append(image);
+
+  setTimeout(answers, 5000);
 }
 
 // $(document).on('click', ".answerbutton", function () {
@@ -91,9 +92,10 @@ function result(isCorrect) {
 
 //   answers();
 // });
+var intervalId;
 function startTimer(setTime) {
   var timer = setTime, minutes, seconds;
-  var intervalId;
+  
   intervalId = setInterval(function () {
     timerRunning = true;
     minutes = parseInt(timer / 60, 10);
