@@ -74,7 +74,18 @@ function result(isCorrect) {
   }
   $("#container").append(image);
 
-  setTimeout(answers, 5000);
+console.log('currentQuestion ', currentQuestion);
+console.log('questions.length', questions.length);
+  if(currentQuestion===questions.length)
+  {
+    setTimeout(function() {
+      console.log('show the result page'+ currentQuestion+ counter);
+      // show the result page
+    }, 5000)
+  } else {
+    setTimeout(answers, 5000);
+  }
+  
 }
 
 // $(document).on('click', ".answerbutton", function () {
