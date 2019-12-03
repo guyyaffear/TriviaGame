@@ -1,26 +1,15 @@
 var questions = [
   {
-    qustion: "Who play Neo in the Matrix",
+    question: "Who play Neo in the Matrix",
     answers: ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
+    answer: "Keanu Reeves"
   },
   {
-    qustion: "Who play 31 in the Matrix",
+    question: "Who play 31 in the Matrix",
     answers: ["111", "abc", "cbs"],
   },
   {
-    qustion: "Who play 22 in the Matrix",
-    answers: ["222", "3333", "h1h2h3"],
-  },
-  {
-    qustion: "Who play Neo in the Matrix",
-    answers: ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
-  },
-  {
-    qustion: "Who play 31 in the Matrix",
-    answers: ["111", "abc", "cbs"],
-  },
-  {
-    qustion: "Who play 22 in the Matrix",
+    question: "Who play 22 in the Matrix",
     answers: ["222", "3333", "h1h2h3"],
   }
 ]
@@ -34,33 +23,36 @@ var setTime = 30;
 function answers() {
   console.log('answers is called')
   $("#container").empty();
-  $("#container").append(("<h2>" + questions[currentQuestion].qustion + "</h2>"));
+  $("#container").append(("<h2>" + questions[currentQuestion].question + "</h2>"));
   // console.log(questions[currentQuestion].answers);
   for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
     var answerbutton = $("<button>");
     answerbutton.attr("data-letter", questions[currentQuestion].answers[i]);
     answerbutton.addClass("answerbutton");
     answerbutton.text(questions[currentQuestion].answers[i]);
+    answerbutton.click(handleClick);
     $("#container").append(answerbutton);
     // console.log(answerbutton.text());
     // console.log(questions[currentQuestion].answers[0]);
+    
   }
 
-  $(document).on('click', ".answerbutton", handleClick);
+  // $(document).on('click', ".answerbutton", handleClick);
 }
 
 function handleClick(){
+  var answer = false;
   console.log('possible answers are', questions[currentQuestion].answers);
-  if ($(this).text() === questions[currentQuestion].answers[0]) {
+  if ( $(this).text() === questions[currentQuestion].answers[0] ) {
     console.log('win win win')
-    result(true);
+    result(!answer);
     counter++;
 
     console.log(counter);
   }
   else {
     console.log('loser')
-    result(false);
+    result(answer);
     console.log("worng answer");
   }
 
