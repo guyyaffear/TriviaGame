@@ -6,21 +6,21 @@ var questions = [
   },
   {
     question: "Who is actually a chef?",
-    answers: ['Chandler','Monica', 'Rachel', 'Ross'],
+    answers: ['Chandler', 'Monica', 'Rachel', 'Ross'],
   },
   {
     question: "What state is Kenneth originally from?",
-    answers: ["New York","Alabama","Georgia","Arkansas","Florida"],
+    answers: ["New York", "Alabama", "Georgia", "Arkansas", "Florida"],
   }
 ]
 
 var counter = 0;
 var currentQuestion = 0;
 var setTime = 30;
-var answerQ1 = questions[currentQuestion].answers[0];
-var answerQ2 = questions[currentQuestion].answers[1];
-var answerQ3 = questions[currentQuestion].answers[4];
-
+var answerQ1 = questions[0].answers[0];
+var answerQ2 = questions[1].answers[1];
+var answerQ3 = questions[2].answers[4];
+console.log('Q1', answerQ1, 'Q2', answerQ2, 'Q3', answerQ3);
 
 
 function answers() {
@@ -37,22 +37,22 @@ function answers() {
     $("#container").append(answerbutton);
     // console.log(answerbutton.text());
     // console.log(questions[currentQuestion].answers[0]);
-    
+
   }
 
   // $(document).on('click', ".answerbutton", handleClick);
 }
 
-function handleClick(){
+function handleClick() {
   var answer = false;
   // for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
-    console.log('possible answers are', questions[currentQuestion].answers);
-  if ( ($(this).text() === answerQ1) || ($(this).text() === answerQ2) || ($(this).text() === answerQ3)) {
+  console.log('possible answers are', questions[currentQuestion].answers);
+  if (($(this).text() === answerQ1) || ($(this).text() === answerQ2) || ($(this).text() === answerQ3)) {
     console.log('win win win')
     result(!answer);
     counter++;
 
-    console.log("counter is "+counter);
+    console.log("counter is " + counter);
   }
   else {
     console.log('loser')
@@ -66,31 +66,29 @@ function handleClick(){
 
 function result(isCorrect) {
   console.log('result is called');
-  
+
   $('#container').empty();
   var image = $("<img>");
-  console.log('isCorrect',isCorrect);
+  console.log('isCorrect', isCorrect);
   if (isCorrect) {
-    image.attr('src','https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif')
+    image.attr('src', 'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif')
   }
-  else
-  {
-    image.attr('src','https://media.giphy.com/media/m8eIbBdkJK7Go/giphy.gif')
+  else {
+    image.attr('src', 'https://media.giphy.com/media/m8eIbBdkJK7Go/giphy.gif')
   }
   $("#container").append(image);
 
-console.log('currentQuestion ', currentQuestion);
-console.log('questions.length', questions.length);
-  if(currentQuestion===questions.length)
-  {
-    setTimeout(function() {
-      console.log('show the result page'+ currentQuestion+ counter);
+  console.log('currentQuestion ', currentQuestion);
+  console.log('questions.length', questions.length);
+  if (currentQuestion === questions.length) {
+    setTimeout(function () {
+      console.log('show the result page' + currentQuestion + counter);
       // show the result page
     }, 5000)
   } else {
     setTimeout(answers, 5000);
   }
-  
+
 }
 
 // $(document).on('click', ".answerbutton", function () {
@@ -115,7 +113,7 @@ console.log('questions.length', questions.length);
 var intervalId;
 function startTimer(setTime) {
   var timer = setTime, minutes, seconds;
-  
+
   intervalId = setInterval(function () {
     timerRunning = true;
     minutes = parseInt(timer / 60, 10);
@@ -133,7 +131,7 @@ function timeUp(interval) {
   clearInterval(interval);
   timerRunning = false;
   result(false);
-  $(".timer").text("Time up!!!"+"The answer is "+ questions[currentQuestion].answers[0]);
+  $(".timer").text("Time up!!!" + "The answer is " + questions[currentQuestion].answers[0]);
 
 }
 $('#Strbutton').on('click', function () {
