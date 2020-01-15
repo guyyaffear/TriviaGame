@@ -5,23 +5,26 @@ var questions = [
     answer: "Keanu Reeves"
   },
   {
-    question: "Who play 31 in the Matrix",
-    answers: ["111", "abc", "cbs"],
+    question: "Who is actually a chef?",
+    answers: ['Chandler','Monica', 'Rachel', 'Ross'],
   },
   {
-    question: "Who play 22 in the Matrix",
-    answers: ["222", "3333", "h1h2h3"],
+    question: "What state is Kenneth originally from?",
+    answers: ["New York","Alabama","Georgia","Arkansas","Florida"],
   }
 ]
 
 var counter = 0;
 var currentQuestion = 0;
 var setTime = 30;
+var answerQ1 = questions[currentQuestion].answers[0];
+var answerQ2 = questions[currentQuestion].answers[1];
+var answerQ3 = questions[currentQuestion].answers[4];
 
 
 
 function answers() {
-  console.log('answers is called')
+  // console.log('answers is called')
   $("#container").empty();
   $("#container").append(("<h2>" + questions[currentQuestion].question + "</h2>"));
   // console.log(questions[currentQuestion].answers);
@@ -42,13 +45,14 @@ function answers() {
 
 function handleClick(){
   var answer = false;
-  console.log('possible answers are', questions[currentQuestion].answers);
-  if ( $(this).text() === questions[currentQuestion].answers[0] ) {
+  // for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
+    console.log('possible answers are', questions[currentQuestion].answers);
+  if ( ($(this).text() === answerQ1) || ($(this).text() === answerQ2) || ($(this).text() === answerQ3)) {
     console.log('win win win')
     result(!answer);
     counter++;
 
-    console.log(counter);
+    console.log("counter is "+counter);
   }
   else {
     console.log('loser')
@@ -58,6 +62,7 @@ function handleClick(){
 
   currentQuestion++;
 }
+// }
 
 function result(isCorrect) {
   console.log('result is called');
