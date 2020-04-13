@@ -1,141 +1,184 @@
-var questions = [
-  {
-    question: "Who play Neo in the Matrix",
-    answers: ["Keanu Reeves", "Tom Hanks", "Jim Carey"],
-    answer: "Keanu Reeves"
-  },
-  {
-    question: "Who is actually a chef?",
-    answers: ['Chandler', 'Monica', 'Rachel', 'Ross'],
-  },
-  {
-    question: "What state is Kenneth originally from?",
-    answers: ["New York", "Alabama", "Georgia", "Arkansas", "Florida"],
-  }
-]
 
-var counter = 0;
-var currentQuestion = 0;
-var setTime = 30;
-var answerQ1 = questions[0].answers[0];
-var answerQ2 = questions[1].answers[1];
-var answerQ3 = questions[2].answers[4];
-console.log('Q1', answerQ1, 'Q2', answerQ2, 'Q3', answerQ3);
+var card = $("#placeofthegame");
+var countStartNumber = 30;
 
+// Question set
+var questions = [{
+  question: "What was the first full length CGI movie?",
+  answers: ["A Bug's Life", "Monsters Inc.", "Toy Story", "The Lion King"],
+  correctAnswer: "Toy Story",
+  image: "assets/images/toystory.gif"
+}, {
+  question: "Which of these is NOT a name of one of the Spice Girls?",
+  answers: ["Sporty Spice", "Fred Spice", "Scary Spice", "Posh Spice"],
+  correctAnswer: "Fred Spice",
+  image: "assets/images/spicegirls.gif"
+}, {
+  question: "Which NBA team won the most titles in the 90s?",
+  answers: ["New York Knicks", "Portland Trailblazers", "Los Angeles Lakers", "Chicago Bulls"],
+  correctAnswer: "Chicago Bulls",
+  image: "assets/images/bulls.gif"
+}, {
+  question: "Which group released the hit song, 'Smells Like Teen Spirit'?",
+  answers: ["Nirvana", "Backstreet Boys", "The Offspring", "No Doubt"],
+  correctAnswer: "Nirvana",
+  image: "assets/images/nirvanabark.gif"
+}, {
+  question: "Which popular Disney movie featured the song, \"Circle of Life\"?",
+  answers: ["Aladdin", "Hercules", "Mulan", "The Lion King"],
+  correctAnswer: "The Lion King",
+  image: "assets/images/lionking.gif"
+}, {
+  question: "Finish this line from the Fresh Prince of Bel-Air theme song: \"I whistled for a cab and when it came near, the license plate said...\"",
+  answers: ["Dice", "Mirror", "Fresh", "Cab"],
+  correctAnswer: "Fresh",
+  image: "assets/images/fresh.gif"
+}, {
+  question: "What was Doug's best friend's name?",
+  answers: ["Skeeter", "Mark", "Zach", "Cody"],
+  correctAnswer: "Skeeter",
+  image: "assets/images/skeeter.gif"
+}, {
+  question: "What was the name of the principal at Bayside High in Saved By The Bell?",
+  answers: ["Mr.Zhou", "Mr.Driggers", "Mr.Belding", "Mr.Page"],
+  correctAnswer: "Mr.Belding",
+  image: "assets/images/belding.gif"
+}];
 
-function answers() {
-  // console.log('answers is called')
-  $("#container").empty();
-  $("#container").append(("<h2>" + questions[currentQuestion].question + "</h2>"));
-  // console.log(questions[currentQuestion].answers);
-  for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
-    var answerbutton = $("<button>");
-    answerbutton.attr("data-letter", questions[currentQuestion].answers[i]);
-    answerbutton.addClass("answerbutton");
-    answerbutton.text(questions[currentQuestion].answers[i]);
-    answerbutton.click(handleClick);
-    $("#container").append(answerbutton);
-    // console.log(answerbutton.text());
-    // console.log(questions[currentQuestion].answers[0]);
+// Variable to hold our setInterval
+var timer;
 
-  }
+var game = {
 
-  // $(document).on('click', ".answerbutton", handleClick);
-}
+  questions: questions,
+  currentQuestion: 0,
+  counter: countStartNumber,
+  correct: 0,
+  incorrect: 0,
 
-function handleClick() {
-  var answer = false;
-  // for (var i = 0; i < questions[currentQuestion].answers.length; i++) {
-  console.log('possible answers are', questions[currentQuestion].answers);
-  if (($(this).text() === answerQ1) || ($(this).text() === answerQ2) || ($(this).text() === answerQ3)) {
-    console.log('win win win')
-    result(!answer);
-    counter++;
-
-    console.log("counter is " + counter);
-  }
-  else {
-    console.log('loser')
-    result(answer);
-    console.log("worng answer");
-  }
-
-  currentQuestion++;
-}
-// }
-
-function result(isCorrect) {
-  console.log('result is called');
-
-  $('#container').empty();
-  var image = $("<img>");
-  console.log('isCorrect', isCorrect);
-  if (isCorrect) {
-    image.attr('src', 'https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif')
-  }
-  else {
-    image.attr('src', 'https://media.giphy.com/media/m8eIbBdkJK7Go/giphy.gif')
-  }
-  $("#container").append(image);
-
-  console.log('currentQuestion ', currentQuestion);
-  console.log('questions.length', questions.length);
-  if (currentQuestion === questions.length) {
-    setTimeout(function () {
-      console.log('show the result page' + currentQuestion + counter);
-      // show the result page
-    }, 5000)
-  } else {
-    setTimeout(answers, 5000);
-  }
-
-}
-
-// $(document).on('click', ".answerbutton", function () {
-// console.log('clicked')
-//   if ($(this).text() === questions[currentQuestion].answers[0]) {
-//     console.log('win win win')
-//     result(true);
-//     counter++;
-
-//     console.log(counter);
-//   }
-//   else {
-//     console.log('loser')
-//     result(false);
-//     console.log("worng answer");
-//   }
-
-//   currentQuestion++;
-
-//   answers();
-// });
-var intervalId;
-function startTimer(setTime) {
-  var timer = setTime, minutes, seconds;
-
-  intervalId = setInterval(function () {
-    timerRunning = true;
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    $(".timer").text(minutes + ":" + seconds);
-    if (--timer < 0) {
-      timeUp(intervalId);
-      // document.getElementById("details").setAttribute("disabled","disabled");
+  countdown: function () {
+    this.counter--;
+    $("#counter-number").text(this.counter);
+    if (this.counter === 0) {
+      console.log("TIME UP");
+      this.timeUp();
     }
-  }, 1000);
-}
-function timeUp(interval) {
-  clearInterval(interval);
-  timerRunning = false;
-  result(false);
-  $(".timer").text("Time up!!!" + "The answer is " + questions[currentQuestion].answers[0]);
+  },
 
-}
-$('#Strbutton').on('click', function () {
-  answers();
-  startTimer(setTime);
-}
-)
+  loadQuestion: function () {
+
+    timer = setInterval(this.countdown.bind(this), 1000);
+
+    card.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
+
+    for (var i = 0; i < questions[this.currentQuestion].answers.length; i++) {
+      card.append("<button class='answer-button' id='button' data-name='" + questions[this.currentQuestion].answers[i]
+        + "'>" + questions[this.currentQuestion].answers[i] + "</button>");
+    }
+  },
+
+  nextQuestion: function () {
+    this.counter = window.countStartNumber;
+    $("#counter-number").text(this.counter);
+    this.currentQuestion++;
+    this.loadQuestion.bind(this)();
+  },
+
+  timeUp: function () {
+
+    clearInterval(window.timer);
+
+    $("#counter-number").text(this.counter);
+
+    card.html("<h2>Out of Time!</h2>");
+    card.append("<h3>The Correct Answer was: " + questions[this.currentQuestion].correctAnswer);
+    card.append("<img src='" + questions[this.currentQuestion].image + "' />");
+
+    if (this.currentQuestion === questions.length - 1) {
+      setTimeout(this.results, 3 * 1000);
+    }
+    else {
+      setTimeout(this.nextQuestion, 3 * 1000);
+    }
+  },
+
+  results: function () {
+
+    clearInterval(window.timer);
+
+    card.html("<h2>All done, heres how you did!</h2>");
+
+    $("#counter-number").text(this.counter);
+
+    card.append("<h3>Correct Answers: " + this.correct + "</h3>");
+    card.append("<h3>Incorrect Answers: " + this.incorrect + "</h3>");
+    card.append("<h3>Unanswered: " + (questions.length - (this.incorrect + this.correct)) + "</h3>");
+    card.append("<br><button id='start-over'>Start Over?</button>");
+  },
+
+  clicked: function (e) {
+    clearInterval(window.timer);
+    if ($(e.target).attr("data-name") === questions[this.currentQuestion].correctAnswer) {
+      this.answeredCorrectly();
+    }
+    else {
+      this.answeredIncorrectly();
+    }
+  },
+
+  answeredIncorrectly: function () {
+
+    this.incorrect++;
+
+    clearInterval(window.timer);
+
+    card.html("<h2>Nope!</h2>");
+    card.append("<h3>The Correct Answer was: " + questions[this.currentQuestion].correctAnswer + "</h3>");
+    card.append("<img src='" + questions[this.currentQuestion].image + "' />");
+
+    if (this.currentQuestion === questions.length - 1) {
+      setTimeout(this.results.bind(this), 3 * 1000);
+    }
+    else {
+      setTimeout(this.nextQuestion.bind(this), 3 * 1000);
+    }
+  },
+
+  answeredCorrectly: function () {
+
+    clearInterval(window.timer);
+
+    this.correct++;
+
+    card.html("<h2>Correct!</h2>");
+    card.append("<img src='" + questions[this.currentQuestion].image + "' />");
+
+    if (this.currentQuestion === questions.length - 1) {
+      setTimeout(this.results.bind(this), 3 * 1000);
+    }
+    else {
+      setTimeout(this.nextQuestion.bind(this), 3 * 1000);
+    }
+  },
+
+  reset: function () {
+    this.currentQuestion = 0;
+    this.counter = countStartNumber;
+    this.correct = 0;
+    this.incorrect = 0;
+    this.loadQuestion();
+  }
+};
+
+// CLICK EVENTS
+
+$(document).on("click", "#start-over", game.reset.bind(game));
+
+$(document).on("click", ".answer-button", function (e) {
+  game.clicked.bind(game, e)();
+});
+
+$(document).on("click", "#start", function () {
+  $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter-number'>30</span> Seconds</h2>");
+  game.loadQuestion.bind(game)();
+});
