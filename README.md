@@ -16,3 +16,5 @@ When you click Start, you will be given 10 multiple-choice questions covering th
 This project was built with JavaScript, jQuery, Bootstrap, HTML, and CSS. Most all of the HTML content is generated dynamically through JavaScript.
 
 *Note: This was created for UC Berkeley Extension coding bootcamp as TriviaGame in week three.*
+
+*working*
